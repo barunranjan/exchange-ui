@@ -1,5 +1,7 @@
+import { env } from "../env";
+
 export default function setupAxios(axios) {
-  axios.defaults.baseURL = "http://localhost:8000";
+  axios.defaults.baseURL = env.apiUrl;
 
   axios.interceptors.request.use(
     (config) => {
