@@ -16,7 +16,16 @@ import React from "react";
 
 const ExchangeListTable = (props) => {
   const { apiConfigs, loading } = props;
-  console.log(apiConfigs);
+  console.log(apiConfigs, props.queryParams);
+
+  const handlePageChange = (page, sizePerPage) => {
+    props.fetchData(page, sizePerPage);
+  }
+
+  const handleSizePerPageChange = (sizePerPage) => {
+    // When changing the size per page always navigating to the first page
+    props.fetchData(1, sizePerPage);
+  }
 
   const columns = [
     {
@@ -62,9 +71,12 @@ const ExchangeListTable = (props) => {
       <PaginationProvider
         pagination={paginationFactory({
           custom: true,
-          totalSize: apiConfigs.length,
-          page: 1,
-          sizePerPage: 10,
+          // totalSize: apiConfigs.length,
+          // page: 3,
+          // sizePerPage: 10,
+          onPageChange: handlePageChange,
+          onSizePerPageChange: handleSizePerPageChange,
+          ...props.queryParams,
           hideSizePerPage: apiConfigs.length === 0,
           sizePerPageList: [
             {
@@ -94,12 +106,17 @@ const ExchangeListTable = (props) => {
             <BootstrapTable
               wrapperClasses="table-responsive"
               bordered={false}
+              bootstrap4
+              remote
               classes="table table-head-custom table-vertical-center no-wrap v-middle"
               keyField="id"
               data={apiConfigs}
               columns={columns}
+              onTableChange = {(type, newState) => {
+                // handle any data change here
+              }}
               noDataIndication={
-                <div className="text-center">No User Found</div>
+                <div className="text-center">No Data Found</div>
               }
               {...paginationTableProps}
             >

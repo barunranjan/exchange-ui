@@ -4,24 +4,26 @@ import React, { Component } from "react";
 import ExchangeListTable from "./exchangeTable/ExchangeListTable";
 import { Link } from "react-router-dom";
 
-// import ApisListTable from "./apis-table/ApisListTable";
-
-
-// import { fetchConfigs } from "../store/apiCrud";
+const fetchDummyData = (page, sizePerPage) => {
+  return Array.apply(0, new Array(sizePerPage)).map((ex, i) => ({
+    id: ((page - 1) * sizePerPage) + i + 1,
+    name: "dummyName " + (((page - 1) * sizePerPage) + i + 1),
+    description: "this is dummy description",
+    inputType: ["duumy1", "dummy2"],
+    outputType: ["duumy1", "dummy2"],
+  }));
+};
 
 class ExchangeListPage extends Component {
   state = {
     apiConfigs: [],
     loading: false,
-    dummyData: [
-      {
-        id: 1,
-        name: "dummyName",
-        description: "this is dummy description",
-        inputType: ["duumy1", "dummy2"],
-        outputType: ["duumy1", "dummy2"],
-      },
-    ],
+    dummyData: fetchDummyData(1, 10),
+    queryParams: {
+      totalSize: 100,
+      sizePerPage: 10,
+      page: 1,
+    },
   };
   //   componentDidMount() {
   //     this.setState({ loading: true });
@@ -31,6 +33,14 @@ class ExchangeListPage extends Component {
   //       this.setState({ loading: false });
   //     });
   //   }
+
+  fetchData = (page, sizePerPage) => {
+    console.log("FETCHING FROM API", page, sizePerPage);
+   this.setState({
+      dummyData: fetchDummyData(page, sizePerPage),
+      queryParams: { ...this.state.queryParams, page, sizePerPage },
+    });
+  };
 
   onEditExchange = (id) => {
     this.props.history.push(`/exchange/edit/${id}`);
@@ -47,7 +57,7 @@ class ExchangeListPage extends Component {
                   className="btn btn-primary"
                   to="/exchange/new"
                 >
-                  <i className="ti ti-plus"></i>  Add Exchange
+                  <i className="ti ti-plus"></i> Add Exchange
                 </Link>
               </div>
             </div>
@@ -61,6 +71,8 @@ class ExchangeListPage extends Component {
                 </div>
                 <ExchangeListTable
                   apiConfigs={this.state.dummyData}
+                  queryParams={this.state.queryParams}
+                  fetchData={this.fetchData}
                   loading={this.state.loading}
                   onEditExchange={this.onEditExchange}
                 />

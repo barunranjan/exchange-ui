@@ -47,13 +47,13 @@ export function PaginationLinks({ paginationProps }) {
               onClick={() => handleFirstPage(paginationProps)}
               className="btn btn-icon btn-sm btn-light btn-hover-primary mr-2 my-1"
             >
-              <i className="ki ki-bold-double-arrow-back icon-xs" />
+              <i className="ti ti-angle-double-left icon-xs" />
             </a>
             <a
               onClick={() => handlePrevPage(paginationProps)}
               className="btn btn-icon btn-sm btn-light btn-hover-primary mr-2 my-1"
             >
-              <i className="ki ki-bold-arrow-back icon-xs" />
+              <i className="ti ti-angle-left icon-xs" />
             </a>
 
             {page > 1 && (
@@ -81,13 +81,13 @@ export function PaginationLinks({ paginationProps }) {
               onClick={() => handleNextPage(paginationProps)}
               className="btn btn-icon btn-sm btn-light btn-hover-primary mr-2 my-1"
             >
-              <i className="ki ki-bold-arrow-next icon-xs"></i>
+              <i className="ti ti-angle-right icon-xs"></i>
             </a>
             <a
               onClick={() => handleLastPage(paginationProps)}
               className="btn btn-icon btn-sm btn-light btn-hover-primary mr-2 my-1"
             >
-              <i className="ki ki-bold-double-arrow-next icon-xs"></i>
+              <i className="ti ti-angle-double-right icon-xs"></i>
             </a>
           </div>
         </>
