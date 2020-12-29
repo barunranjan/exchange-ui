@@ -81,10 +81,10 @@ const ExchangeForm = ({
             errors.description = "Description is required";
           }
 
-          if (values.inputType.length === 0) {
+          if (values.inputType && values.inputType.length === 0) {
             errors.inputType = "Select atleast one input type";
           }
-          if (values.outputType.length === 0) {
+          if (values.outputType && values.outputType.length === 0) {
             errors.outputType = "Select atleast one output type";
           }
           console.log("errors", errors);
