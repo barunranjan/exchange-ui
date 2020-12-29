@@ -1,9 +1,12 @@
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import React, { Component } from "react";
 
-// import ApisListTable from "./apis-table/ApisListTable";
-import { Link } from "react-router-dom";
 import ExchangeListTable from "./exchangeTable/ExchangeListTable";
+import { Link } from "react-router-dom";
+
+// import ApisListTable from "./apis-table/ApisListTable";
+
+
 // import { fetchConfigs } from "../store/apiCrud";
 
 class ExchangeListPage extends Component {
@@ -44,7 +47,7 @@ class ExchangeListPage extends Component {
                   className="btn btn-primary"
                   to="/exchange/new"
                 >
-                  Add Exchange
+                  <i className="ti ti-plus"></i>  Add Exchange
                 </Link>
               </div>
             </div>

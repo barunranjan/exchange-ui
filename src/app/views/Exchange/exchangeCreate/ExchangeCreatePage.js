@@ -1,10 +1,27 @@
-import React from "react";
 import { Col, Row } from "reactstrap";
+
+import ExchangeForm from "./ExchangeForm";
+import React from "react";
 import Toast from "../../../../utils/Toast";
 import { createExchange } from "../store/exchangeCrud";
-import ExchangeForm from "./ExchangeForm";
 
 const ExchangeCreatePage = (props) => {
+  const initialValues = {
+    name: "",
+    description: "",
+    inputTypes: [
+      {
+        paramName: "",
+        paramType: "",
+      },
+    ],
+    outputTypes: [
+      {
+        paramName: "",
+        paramType: "",
+      },
+    ],
+  };
   const handleSubmit = (data) => {
     console.log("data", data);
     createExchange(data)
@@ -17,12 +34,27 @@ const ExchangeCreatePage = (props) => {
         Toast.errorMsg("something went wrong");
       });
   };
+
+  const goBack = () => {
+    props.history.goBack();
+  };
+
   return (
     <>
       <div>
+        <div className="row mb-1">
+          <div className="col-lg-12 text-right">
+            <button color="danger" className="btn btn-primary" onClick={goBack}>
+              <i className="ti ti-arrow-left"></i> Back
+            </button>
+          </div>
+        </div>
         <Row>
           <Col sm={12}>
-            <ExchangeForm handleSubmit={handleSubmit} />
+            <ExchangeForm
+              handleSubmit={handleSubmit}
+              initialValues={initialValues}
+            />
           </Col>
         </Row>
       </div>
