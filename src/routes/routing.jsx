@@ -2,12 +2,12 @@ import MApisPage from '../app/views/apis/ApisPage';
 import MExchangePage from '../app/views/Exchange/ExchangePage';
 
 var ThemeRoutes = [
-  { 
-    path: '/apis', 
-    name: 'APIS', 
-    icon: 'ti-loop', 
-    component: MApisPage 
-  },
+  // { 
+  //   path: '/apis', 
+  //   name: 'APIS', 
+  //   icon: 'ti-loop', 
+  //   component: MApisPage 
+  // },
   { 
     path: '/exchange', 
     name: 'EXCHANGE', 
@@ -15,6 +15,6 @@ var ThemeRoutes = [
     component: MExchangePage 
   },
 
-  { path: '/', pathTo: '/apis', name: 'APIS', redirect: true }
+  { path: '/', pathTo: '/exchange', name: 'EXCHANGE', redirect: true }
 ];
 export default ThemeRoutes;

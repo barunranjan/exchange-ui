@@ -10,9 +10,9 @@ const Routes = () => {
   console.log("ROUTES");
   return (
     <Switch>
-      <Redirect exact from="/" to="/apis" />
+      <Redirect exact from="/" to="/exchange" />
       <Fulllayout>
-        <Route path="/apis" component={MApisPage} />
+        {/* <Route path="/apis" component={MApisPage} /> */}
         <Route path="/exchange" component={MExchangePage} />
       </Fulllayout>
     </Switch>
