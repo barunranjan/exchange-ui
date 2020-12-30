@@ -1,8 +1,9 @@
 import { Col, Row } from "reactstrap";
 import React, { useEffect, useState } from "react";
 
-import ExchangeForm from "../exchangeCreate/ExchangeForm";
-import { getDummyData } from "../exchangeCreate/exchangeFormUtility";
+import ExchangeForm from "../exchangeForm/ExchangeForm";
+import { getDummyData } from "../exchangeForm/exchangeFormUtility";
+
 // import { getExchangeById } from "../store/exchangeCrud";
 
 // const getDummyData = () => {
@@ -47,7 +48,7 @@ const ExchangeEdit = (props) => {
   }, [exchangeId]);
 
   const updateExchange = (data, id) => {
-    // console.log("data", data);
+    console.log("data", data);
     // createExchange(data)
     //   .then((response) => {
     //     console.log("response", response);

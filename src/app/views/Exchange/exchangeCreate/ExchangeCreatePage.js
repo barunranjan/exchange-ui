@@ -1,6 +1,6 @@
 import { Col, Row } from "reactstrap";
 
-import ExchangeForm from "./ExchangeForm";
+import ExchangeForm from "./../exchangeForm/ExchangeForm";
 import React from "react";
 import Toast from "../../../../utils/Toast";
 import { createExchange } from "../store/exchangeCrud";

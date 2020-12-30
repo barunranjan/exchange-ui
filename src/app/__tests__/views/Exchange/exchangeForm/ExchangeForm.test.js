@@ -1,8 +1,7 @@
-import { shallow } from "enzyme";
+import ExchangeForm from "../../../../views/Exchange/exchangeForm/ExchangeForm";
 import React from "react";
-import ExchangeForm from "../../../../views/Exchange/exchangeCreate/ExchangeForm";
 import { findByTestAttr } from '../../../../../utils/testUtils'
-
+import { shallow } from "enzyme";
 
 describe("exchange create page", () => {
     test("render without error", () => {

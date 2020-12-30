@@ -7,14 +7,14 @@ import {
   CardTitle,
 } from "reactstrap";
 import { Field, Formik } from "formik";
+import { exchangeValidate, submitValues } from "./exchangeFormUtility";
 
 import { Input } from "../../../../components/forms/Input";
 import InputTypeField from "./components/InputTypeField";
 import OutputTypeField from "./components/OutputTypeField";
 import React from "react";
-import { getInputClasses } from "../../../../utils/formUtils";
 import { Textarea } from "../../../../components/forms/Textarea";
-import { exchangeValidate, submitValues } from "./exchangeFormUtility";
+import { getInputClasses } from "../../../../utils/formUtils";
 
 const ExchangeForm = ({
   className,

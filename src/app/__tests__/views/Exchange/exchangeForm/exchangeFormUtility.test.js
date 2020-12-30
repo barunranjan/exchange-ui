@@ -1,8 +1,8 @@
 import {
   exchangeValidate,
-  submitValues,
   getDummyData,
-} from "../../../../views/Exchange/exchangeCreate/exchangeFormUtility";
+  submitValues,
+} from "../../../../views/Exchange/exchangeForm/exchangeFormUtility";
 
 describe("ender without error", () => {
   test("throw error when empty value is submited", () => {
