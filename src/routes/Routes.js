@@ -2,8 +2,6 @@ import React, { lazy } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import Fulllayout from "../layouts/fulllayout";
-
-const MApisPage = lazy(() => import("../app/views/apis/ApisPage"));
 const MExchangePage = lazy(() => import("../app/views/Exchange/ExchangePage"));
 
 const Routes = () => {

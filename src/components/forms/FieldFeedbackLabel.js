@@ -14,7 +14,7 @@ const inputLabel = ({ label, touched, error, customFeedbackLabel }) => {
       {customFeedbackLabel && <>{customFeedbackLabel}</>}
       {!customFeedbackLabel && (
         <>
-          Please enter <b>{label}</b>
+          <b>{label}</b>
         </>
       )}
     </div>
@@ -43,7 +43,7 @@ export function FieldFeedbackLabel({
   touched,
   error,
   type,
-  customFeedbackLabel
+  customFeedbackLabel,
 }) {
   switch (type) {
     case "text":

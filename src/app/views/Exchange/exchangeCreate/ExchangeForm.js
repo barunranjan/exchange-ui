@@ -13,6 +13,8 @@ import InputTypeField from "./components/InputTypeField";
 import OutputTypeField from "./components/OutputTypeField";
 import React from "react";
 import { getInputClasses } from "../../../../utils/formUtils";
+import { Textarea } from "../../../../components/forms/Textarea";
+import { exchangeValidate, submitValues } from "./exchangeFormUtility";
 
 const ExchangeForm = ({
   className,
@@ -21,43 +23,32 @@ const ExchangeForm = ({
   successMsg,
   initialValues,
 }) => {
+
+  const onSubmit = (values) => {
+    handleSubmit(submitValues(values))
+  }
+
   return (
     <>
       <Formik
+        data-test='test-exchange-form'
         initialValues={initialValues}
-        validate={(values) => {
-          const errors = {};
+       
+        validate={exchangeValidate}
+       onSubmit={onSubmit}
+        // onSubmit={(values, { setStatus, setSubmitting }) => {
+        //   values.inputTypes = values.inputTypes.map((type) => ({
+        //     ...type,
+        //     paramType: type.paramType.value,
+        //   }));
+        //   values.outputTypes = values.outputTypes.map((type) => ({
+        //     ...type,
+        //     paramType: type.paramType.value,
+        //   }));
+          
 
-          if (!values.name) {
-            errors.name = "Name is required";
-          }
-
-          if (!values.description) {
-            errors.description = "Description is required";
-          }
-
-          if (values.inputTypes && values.inputTypes.length === 0) {
-            errors.inputTypes = "Select atleast one input type";
-          }
-          if (values.outputTypes && values.outputTypes.length === 0) {
-            errors.outputTypes = "Select atleast one output type";
-          }
-          console.log("errors", errors);
-          return errors;
-        }}
-        onSubmit={(values, { setStatus, setSubmitting }) => {
-          values.inputTypes = values.inputTypes.map((type) => ({
-            ...type,
-            paramType: type.paramType.value,
-          }));
-          values.outputTypes = values.outputTypes.map((type) => ({
-            ...type,
-            paramType: type.paramType.value,
-          }));
-
-          console.log(values);
-          //   handleSubmit(values, setStatus, setSubmitting);
-        }}
+        //     handleSubmit(values, setStatus, setSubmitting);
+        // }}
       >
         {({
           values,
@@ -69,8 +60,9 @@ const ExchangeForm = ({
           handleSubmit,
           isSubmitting,
           handleReset,
+          getFieldProps
         }) => (
-          <form onSubmit={handleSubmit} noValidate autoComplete="off">
+          <form data-test='test-form' onSubmit={handleSubmit} noValidate autoComplete="off">
             {status && (
               <div
                 role="alert"
@@ -110,12 +102,13 @@ const ExchangeForm = ({
                         Name
                       </label>
                       <div className="col-lg-9 col-xl-9">
-                        <Field type="text" name="name" component={Input}>
-                          {({ field, form, meta }) => (
+                        <Field data-test = 'test-name' type="text" name="name" component={Input} placeholder='Enter name'/>
+                          {/* {({ field, form, meta}) => (
                             <div>
                               <input
                                 type="text"
                                 {...field}
+                                
                                 className={`${getInputClasses(meta)}`}
                                 placeholder="Enter Name"
                               />
@@ -125,8 +118,9 @@ const ExchangeForm = ({
                                 </div>
                               )}
                             </div>
-                          )}
-                        </Field>
+                          )} */}
+                       
+                       
                       </div>
                     </div>
 
@@ -135,8 +129,8 @@ const ExchangeForm = ({
                         Description
                       </label>
                       <div className="col-lg-9 col-xl-9">
-                        <Field type="text" name="description" component={Input}>
-                          {({ field, form, meta }) => (
+                        <Field data-test = 'test-description' type="text" name="description" component={Textarea} placeholder='Enter description...'>
+                          {/* {({ field, form, meta }) => (
                             <div>
                               <textarea
                                 type="text"
@@ -150,7 +144,7 @@ const ExchangeForm = ({
                                 </div>
                               )}
                             </div>
-                          )}
+                          )} */}
                         </Field>
                       </div>
                     </div>
@@ -160,7 +154,7 @@ const ExchangeForm = ({
                         Input Types
                       </label>
                       <div className="col-lg-12 col-xl-12 mt-2">
-                        <InputTypeField inputTypes={values.inputTypes} />
+                        <InputTypeField inputTypes={values && values.inputTypes}/>
                       </div>
                     </div>
                     <div className="form-group row">
@@ -168,7 +162,7 @@ const ExchangeForm = ({
                         Output Types
                       </label>
                       <div className="col-lg-12 col-xl-12 mt-2">
-                        <OutputTypeField outputTypes={values.outputTypes} />
+                        <OutputTypeField outputTypes={values&&values.outputTypes} />
                       </div>
                     </div>
                   </div>

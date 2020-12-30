@@ -6,6 +6,7 @@ import Toast from "../../../../utils/Toast";
 import { createExchange } from "../store/exchangeCrud";
 
 const ExchangeCreatePage = (props) => {
+
   const initialValues = {
     name: "",
     description: "",
@@ -23,16 +24,15 @@ const ExchangeCreatePage = (props) => {
     ],
   };
   const handleSubmit = (data) => {
-    console.log("data", data);
-    createExchange(data)
-      .then((response) => {
-        console.log("response", response);
-        Toast.successMsg("Api saved successfully");
-      })
-      .catch((err) => {
-        console.error(err);
-        Toast.errorMsg("something went wrong");
-      });
+
+    console.log("data",data)
+    // createExchange(data)
+    //   .then((response) => {
+    //     Toast.successMsg("Api saved successfully");
+    //   })
+    //   .catch((err) => {
+    //     Toast.errorMsg("something went wrong");
+    //   });
   };
 
   const goBack = () => {
@@ -41,17 +41,18 @@ const ExchangeCreatePage = (props) => {
 
   return (
     <>
-      <div>
+      <div data-test='test-exchangeCreatePage'>
         <div className="row mb-1">
           <div className="col-lg-12 text-right">
-            <button color="danger" className="btn btn-primary" onClick={goBack}>
+            <button data-test='test-button' color="danger" className="btn btn-primary" onClick={goBack}>
               <i className="ti ti-arrow-left"></i> Back
             </button>
           </div>
         </div>
-        <Row>
+        <Row >
           <Col sm={12}>
             <ExchangeForm
+             data-test='test-form'
               handleSubmit={handleSubmit}
               initialValues={initialValues}
             />

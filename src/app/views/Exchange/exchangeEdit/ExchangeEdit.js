@@ -2,34 +2,34 @@ import { Col, Row } from "reactstrap";
 import React, { useEffect, useState } from "react";
 
 import ExchangeForm from "../exchangeCreate/ExchangeForm";
-
+import { getDummyData } from "../exchangeCreate/exchangeFormUtility";
 // import { getExchangeById } from "../store/exchangeCrud";
 
-const getDummyData = () => {
-  let inputTypes = ["plaintext", "uppercase"];
-  let outputTypes = ["reverseString", "plaintext", "uppercase"];
-  return {
-    id: 1,
-    name: "dummyName",
-    description: "dummy descprition",
-    inputTypes: inputTypes.map((ex) => ({
-      ...ex,
-      paramName: ex,
-      paramType: {
-        label: ex,
-        value: ex,
-      },
-    })),
-    outputTypes: outputTypes.map((ex) => ({
-      ...ex,
-      paramName: ex,
-      paramType: {
-        label: ex,
-        value: ex,
-      },
-    })),
-  };
-};
+// const getDummyData = () => {
+//   let inputTypes = ["plaintext", "uppercase"];
+//   let outputTypes = ["reverseString", "plaintext", "uppercase"];
+//   return {
+//     id: 1,
+//     name: "dummyName",
+//     description: "dummy descprition",
+//     inputTypes: inputTypes.map((ex) => ({
+//       // ...ex,
+//       paramName: ex,
+//       paramType: {
+//         label: ex,
+//         value: ex,
+//       },
+//     })),
+//     outputTypes: outputTypes.map((ex) => ({
+//       // ...ex,
+//       paramName: ex,
+//       paramType: {
+//         label: ex,
+//         value: ex,
+//       },
+//     })),
+//   };
+// };
 
 const ExchangeEdit = (props) => {
   const [exchange, setExchange] = useState(null);
@@ -47,7 +47,7 @@ const ExchangeEdit = (props) => {
   }, [exchangeId]);
 
   const updateExchange = (data, id) => {
-    console.log("data", data);
+    // console.log("data", data);
     // createExchange(data)
     //   .then((response) => {
     //     console.log("response", response);
@@ -65,18 +65,24 @@ const ExchangeEdit = (props) => {
 
   return (
     <>
-      <div>
+      <div data-test="test-exchangeEditPage">
         <div className="row mb-1">
           <div className="col-lg-12 text-right">
-            <button color="danger" className="btn btn-primary" onClick={goBack}>
+            <button
+              data-test="test-button"
+              color="danger"
+              className="btn btn-primary"
+              onClick={goBack}
+            >
               <i className="ti ti-arrow-left"></i> Back
             </button>
           </div>
         </div>
-        <Row>
+        <Row data-test="test-form">
           <Col sm={12}>
             {exchange && (
               <ExchangeForm
+                data-test="test-form"
                 handleSubmit={updateExchange}
                 initialValues={exchange}
               />
