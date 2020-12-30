@@ -1,45 +1,50 @@
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import React, { Component } from "react";
 
+import AppLoader from "../../../../components/AppLoader";
 import ExchangeListTable from "./exchangeTable/ExchangeListTable";
 import { Link } from "react-router-dom";
-
-const fetchDummyData = (page, sizePerPage) => {
-  return Array.apply(0, new Array(sizePerPage)).map((ex, i) => ({
-    id: ((page - 1) * sizePerPage) + i + 1,
-    name: "dummyName " + (((page - 1) * sizePerPage) + i + 1),
-    description: "this is dummy description",
-    inputType: ["duumy1", "dummy2"],
-    outputType: ["duumy1", "dummy2"],
-  }));
-};
+import Toast from "../../../../utils/Toast";
+import { fetchExchangeApiList } from "../store/exchangeCrud";
 
 class ExchangeListPage extends Component {
   state = {
     apiConfigs: [],
     loading: false,
-    dummyData: fetchDummyData(1, 10),
     queryParams: {
-      totalSize: 100,
+      totalSize: 10,
       sizePerPage: 10,
       page: 1,
     },
   };
-  //   componentDidMount() {
-  //     this.setState({ loading: true });
-  //     fetchConfigs().then((response) => {
-  //       console.log("fetchConfigs", response.data);
-  //       this.setState({ apiConfigs: response.data });
-  //       this.setState({ loading: false });
-  //     });
-  //   }
+  componentDidMount() {
+    this.fetchData(1, 10);
+  }
 
-  fetchData = (page, sizePerPage) => {
-    console.log("FETCHING FROM API", page, sizePerPage);
-   this.setState({
-      dummyData: fetchDummyData(page, sizePerPage),
-      queryParams: { ...this.state.queryParams, page, sizePerPage },
-    });
+  fetchData = async (page, sizePerPage) => {
+      console.log("FETCHING FROM API", page, sizePerPage);
+    //  this.setState({
+    //     dummyData: fetchDummyData(page, sizePerPage),
+    //     queryParams: { ...this.state.queryParams, page, sizePerPage },
+    //   });
+    try {
+      this.setState({ loading: true });
+      const apiConfigs = await fetchExchangeApiList(page, sizePerPage);
+      console.log("apiConfigs", apiConfigs);
+      this.setState({
+        apiConfigs: apiConfigs.content,
+        queryParams: {
+          totalSize: apiConfigs.totalPages,
+          sizePerPage: apiConfigs.size,
+          page: apiConfigs.number + 1,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+      Toast.errorMsg("something went wrong");
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   onEditExchange = (id) => {
@@ -48,6 +53,7 @@ class ExchangeListPage extends Component {
   render() {
     return (
       <div>
+        {this.state.loading && <AppLoader />}
         <Row>
           <Col sm={12}>
             <div className="row mb-1">
@@ -70,7 +76,7 @@ class ExchangeListPage extends Component {
                   </div>
                 </div>
                 <ExchangeListTable
-                  apiConfigs={this.state.dummyData}
+                  apiConfigs={this.state.apiConfigs}
                   queryParams={this.state.queryParams}
                   fetchData={this.fetchData}
                   loading={this.state.loading}
