@@ -1,51 +1,55 @@
 import { Col, Row } from "reactstrap";
 import React, { useEffect, useState } from "react";
 
+import AppLoader from "../../../../components/AppLoader";
 import ExchangeForm from "../exchangeForm/ExchangeForm";
-import { getDummyData } from "../exchangeForm/exchangeFormUtility";
-
-// import { getExchangeById } from "../store/exchangeCrud";
-
-// const getDummyData = () => {
-//   let inputTypes = ["plaintext", "uppercase"];
-//   let outputTypes = ["reverseString", "plaintext", "uppercase"];
-//   return {
-//     id: 1,
-//     name: "dummyName",
-//     description: "dummy descprition",
-//     inputTypes: inputTypes.map((ex) => ({
-//       // ...ex,
-//       paramName: ex,
-//       paramType: {
-//         label: ex,
-//         value: ex,
-//       },
-//     })),
-//     outputTypes: outputTypes.map((ex) => ({
-//       // ...ex,
-//       paramName: ex,
-//       paramType: {
-//         label: ex,
-//         value: ex,
-//       },
-//     })),
-//   };
-// };
+import Toast from "../../../../utils/Toast";
+import { fetchExchangeById } from "./../store/exchangeCrud";
 
 const ExchangeEdit = (props) => {
   const [exchange, setExchange] = useState(null);
   const [loading, setLoading] = useState(false);
   const [exchangeId] = useState(props.match && props.match.params.id);
 
+  const getExchangeById = async (exchangeId) => {
+    setLoading(true);
+    try {
+      const dummyData = await fetchExchangeById(exchangeId);
+      setExchange({
+        ...dummyData,
+        inputEventTypes: dummyData.inputEventTypes.map((type) => ({
+          ...type,
+          eventType: {
+            label: type.eventType,
+            value: type.eventType,
+          },
+        })),
+        outputEventTypes: dummyData.outputEventTypes.map((type) => ({
+          ...type,
+          eventType: {
+            label: type.eventType,
+            value: type.eventType,
+          },
+        })),
+      });
+    } catch (error) {
+      console.log(error);
+      Toast.errorMsg("something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
     // getExchangeById(exchangeId).then((response) => {
     //   setExchange(response.data);
 
-    setExchange(getDummyData());
-
+    getExchangeById(exchangeId);
     setLoading(false);
   }, [exchangeId]);
+
+  console.log(exchange);
 
   const updateExchange = (data, id) => {
     console.log("data", data);
@@ -66,6 +70,7 @@ const ExchangeEdit = (props) => {
 
   return (
     <>
+      {loading && <AppLoader />}
       <div data-test="test-exchangeEditPage">
         <div className="row mb-1">
           <div className="col-lg-12 text-right">

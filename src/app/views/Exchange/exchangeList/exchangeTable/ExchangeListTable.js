@@ -19,7 +19,8 @@ const ExchangeListTable = (props) => {
   console.log(apiConfigs, props.queryParams);
 
   const handlePageChange = (page, sizePerPage) => {
-    props.fetchData(page, sizePerPage);
+     // When changing the page 
+     props.fetchData(page, sizePerPage);
   }
 
   const handleSizePerPageChange = (sizePerPage) => {
@@ -29,25 +30,25 @@ const ExchangeListTable = (props) => {
 
   const columns = [
     {
-      dataField: "apiName",
+      dataField: "apiDefinitionName",
       text: "Name",
     },
     {
-      dataField: "apiDesc",
+      dataField: "apiDefinitionDescription",
       text: "Description",
     },
     {
-      dataField: "inputParams",
-      text: "Input Type",
+      dataField: "inputEventTypes",
+      text: "Input Types",
       formatter: (cell, row) => {
-        return cell.map((type, i) => (<span key={i}>{type.paramName} - {type.paramType}, </span>));
+        return cell.map((type, i) => (<span key={i}>{type.eventName} - {type.eventType}, </span>));
       },
     },
     {
-      dataField: "outputParams",
-      text: "Output Type",
+      dataField: "outputEventTypes",
+      text: "Output Types",
       formatter: (cell, row) => {
-        return cell.map((type, i) => (<span key={i}>{type.paramName} - {type.paramType}, </span>));
+        return cell.map((type, i) => (<span key={i}>{type.eventName} - {type.eventType}, </span>));
       },
     },
     {

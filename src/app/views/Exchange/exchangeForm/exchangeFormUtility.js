@@ -1,32 +1,33 @@
 export const exchangeValidate = (values) => {
   const errors = {};
 
-  if (!values.name) {
-    errors.name = "Name is required";
+  if (!values.apiDefinitionName) {
+    errors.apiDefinitionName = "Name is required";
   }
 
-  if (!values.description) {
-    errors.description = "Description is required";
+  if (!values.apiDefinitionDescription) {
+    errors.apiDefinitionDescription = "Description is required";
   }
 
-  // if (values.inputTypes && values.inputTypes.length === 0) {
-  //   errors.inputTypes = "Select atleast one input type";
-  // }
-  // if (values.outputTypes && values.outputTypes.length === 0) {
-  //   errors.outputTypes = "Select atleast one output type";
-  // }
+  if (values.inputEventTypes && values.inputEventTypes.length === 0) {
+    errors.inputEventTypes = "Select atleast one input type";
+  }
+  
+  if (values.outputEventTypes && values.outputEventTypes.length === 0) {
+    errors.outputEventTypes = "Select atleast one output type";
+  }
   return errors;
 };
 
 export const submitValues = (values, handleSubmit) => {
   if (values) {
-    values.inputTypes = values.inputTypes.map((type) => ({
+    values.inputEventTypes = values.inputEventTypes.map((type) => ({
       ...type,
-      paramType: type.paramType.value,
+      eventType: type.eventType.value,
     }));
-    values.outputTypes = values.outputTypes.map((type) => ({
+    values.outputEventTypes = values.outputEventTypes.map((type) => ({
       ...type,
-      paramType: type.paramType.value,
+      eventType: type.eventType.value,
     }));
 
     return values;
@@ -34,27 +35,21 @@ export const submitValues = (values, handleSubmit) => {
 };
 
 export const getDummyData = () => {
-  let inputTypes = ["plaintext", "uppercase"];
-  let outputTypes = ["reverseString", "plaintext", "uppercase"];
   return {
-    id: 1,
-    name: "dummyName",
-    description: "dummy descprition",
-    inputTypes: inputTypes.map((ex) => ({
-      // ...ex,
-      paramName: ex,
-      paramType: {
-        label: ex,
-        value: ex,
+    id: 103,
+    apiDefinitionName: "My API Name",
+    apiDefinitionDescription: "Some Description",
+    inputEventTypes: [
+      {
+        eventName: "my_param",
+        eventType: "event-type-1",
       },
-    })),
-    outputTypes: outputTypes.map((ex) => ({
-      // ...ex,
-      paramName: ex,
-      paramType: {
-        label: ex,
-        value: ex,
+    ],
+    outputEventTypes: [
+      {
+        eventName: "my_resp-1",
+        eventType: "event-type-2",
       },
-    })),
+    ],
   };
 };

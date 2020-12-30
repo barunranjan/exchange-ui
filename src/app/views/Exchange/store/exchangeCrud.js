@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getDummyData } from "../exchangeForm/exchangeFormUtility";
 
 const fetchDummyData = (page, sizePerPage) => {
   // return Array.apply(0, new Array(sizePerPage)).map((ex, i) => ({
@@ -12,35 +13,35 @@ const fetchDummyData = (page, sizePerPage) => {
   return [
     {
       id: 103,
-      apiName: "My API Name",
-      apiDesc: "Some Description",
-      inputParams: [
+      apiDefinitionName: "My API Name",
+      apiDefinitionDescription: "Some Description",
+      inputEventTypes: [
         {
-          paramName: "my_param",
-          paramType: "event-type-1",
+          eventName: "my_param",
+          eventType: "event-type-1",
         },
       ],
-      outputParams: [
+      outputEventTypes: [
         {
-          paramName: "my_resp-1",
-          paramType: "event-type-2",
+          eventName: "my_resp-1",
+          eventType: "event-type-2",
         },
       ],
     },
     {
-      id: 103,
-      apiName: "My Another API Name",
-      apiDesc: "Some Description",
-      inputParams: [
+      id: 104,
+      apiDefinitionName: "My Another API Name",
+      apiDefinitionDescription: "Some Description",
+      inputEventTypes: [
         {
-          paramName: "my_param",
-          paramType: "event-type-1",
+          eventName: "my_param",
+          eventType: "event-type-1",
         },
       ],
-      outputParams: [
+      outputEventTypes: [
         {
-          paramName: "my_resp-1",
-          paramType: "event-type-2",
+          eventName: "my_resp-1",
+          eventType: "event-type-2",
         },
       ],
     },
@@ -90,6 +91,7 @@ export function searchInputType(text) {
 export function createExchange(exchangeData) {
   return axios.post(`exchange`, exchangeData);
 }
-export function getExchangeById(exchangeId) {
-  return axios.get(`exchange/${exchangeId}`);
+export function fetchExchangeById(exchangeId) {
+  // return axios.get(`exchange/${exchangeId}`);
+  return Promise.resolve(getDummyData());
 }

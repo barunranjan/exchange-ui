@@ -6,19 +6,19 @@ import React from "react";
 import { getInputClasses } from "../../../../../utils/formUtils";
 import { handleSearchInput } from "../../../../helpers/SearchType";
 
-const OutputTypeField = ({ outputTypes }) => {
+const OutputTypeField = ({ outputEventTypes }) => {
   return (
     <div>
       <FieldArray
-        name="outputTypes"
+        name="outputEventTypes"
         render={(arrayHelpers) => (
           <div>
-            {outputTypes && outputTypes.length > 0 ? (
-              outputTypes.map((outputType, index) => (
+            {outputEventTypes && outputEventTypes.length > 0 ? (
+              outputEventTypes.map((outputType, index) => (
                 <div key={index} className="row">
                   <Field
                     type="text"
-                    name={`outputTypes.${index}.paramName`}
+                    name={`outputEventTypes.${index}.eventName`}
                     component={Input}
                   >
                     {({ field, form, meta }) => (
@@ -38,7 +38,7 @@ const OutputTypeField = ({ outputTypes }) => {
                     )}
                   </Field>
                   <Field
-                    name={`outputTypes.${index}.paramType`}
+                    name={`outputEventTypes.${index}.eventType`}
                     placeholder="Search input type"
                     label="Search input type"
                   >
@@ -55,7 +55,7 @@ const OutputTypeField = ({ outputTypes }) => {
                           isSearchable
                           onChange={(value) => {
                             form.setFieldValue(
-                              `outputTypes.${index}.paramType`,
+                              `outputEventTypes.${index}.eventType`,
                               value
                             );
                           }}
@@ -81,8 +81,8 @@ const OutputTypeField = ({ outputTypes }) => {
                       className="btn btn-sm btn-primary ml-1"
                       onClick={() =>
                         arrayHelpers.insert(index + 1, {
-                          paramName: "",
-                          paramType: "",
+                          eventName: "",
+                          eventType: "",
                         })
                       } // insert an empty string at a position
                     >

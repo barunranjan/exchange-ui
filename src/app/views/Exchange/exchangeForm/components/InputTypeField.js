@@ -6,19 +6,19 @@ import React from "react";
 import { getInputClasses } from "../../../../../utils/formUtils";
 import { handleSearchInput } from "../../../../helpers/SearchType";
 
-const InputTypeField = ({ inputTypes }) => {
+const InputTypeField = ({ inputEventTypes }) => {
   return (
     <div>
       <FieldArray
-        name="inputTypes"
+        name="inputEventTypes"
         render={(arrayHelpers) => (
           <div>
-            {inputTypes && inputTypes.length > 0 ? (
-              inputTypes.map((inputType, index) => (
+            {inputEventTypes && inputEventTypes.length > 0 ? (
+              inputEventTypes.map((inputType, index) => (
                 <div key={index} className="row">
                   <Field
                     type="text"
-                    name={`inputTypes.${index}.paramName`}
+                    name={`inputEventTypes.${index}.eventName`}
                     component={Input}
                   >
                     {({ field, form, meta }) => (
@@ -38,7 +38,7 @@ const InputTypeField = ({ inputTypes }) => {
                     )}
                   </Field>
                   <Field
-                    name={`inputTypes.${index}.paramType`}
+                    name={`inputEventTypes.${index}.eventType`}
                     placeholder="Search input type"
                     label="Search input type"
                   >
@@ -55,7 +55,7 @@ const InputTypeField = ({ inputTypes }) => {
                           isSearchable
                           onChange={(value) => {
                             form.setFieldValue(
-                              `inputTypes.${index}.paramType`,
+                              `inputEventTypes.${index}.eventType`,
                               value
                             );
                           }}
@@ -81,8 +81,8 @@ const InputTypeField = ({ inputTypes }) => {
                       className="btn btn-sm btn-primary ml-1"
                       onClick={() =>
                         arrayHelpers.insert(index + 1, {
-                          paramName: "",
-                          paramType: "",
+                          eventName: "",
+                          eventType: "",
                         })
                       } // insert an empty string at a position
                     >
@@ -93,7 +93,7 @@ const InputTypeField = ({ inputTypes }) => {
               ))
             ) : (
               <button type="button" onClick={() => arrayHelpers.push("")}>
-                {/* show this when user has removed all inputTypes from the list */}
+                {/* show this when user has removed all inputEventTypes from the list */}
                 Add
               </button>
             )}

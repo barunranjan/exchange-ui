@@ -14,7 +14,6 @@ import InputTypeField from "./components/InputTypeField";
 import OutputTypeField from "./components/OutputTypeField";
 import React from "react";
 import { Textarea } from "../../../../components/forms/Textarea";
-import { getInputClasses } from "../../../../utils/formUtils";
 
 const ExchangeForm = ({
   className,
@@ -23,19 +22,17 @@ const ExchangeForm = ({
   successMsg,
   initialValues,
 }) => {
-
   const onSubmit = (values) => {
-    handleSubmit(submitValues(values))
-  }
+    handleSubmit(submitValues(values));
+  };
 
   return (
     <>
       <Formik
-        data-test='test-exchange-form'
+        data-test="test-exchange-form"
         initialValues={initialValues}
-       
         validate={exchangeValidate}
-       onSubmit={onSubmit}
+        onSubmit={onSubmit}
         // onSubmit={(values, { setStatus, setSubmitting }) => {
         //   values.inputTypes = values.inputTypes.map((type) => ({
         //     ...type,
@@ -45,7 +42,6 @@ const ExchangeForm = ({
         //     ...type,
         //     paramType: type.paramType.value,
         //   }));
-          
 
         //     handleSubmit(values, setStatus, setSubmitting);
         // }}
@@ -60,9 +56,14 @@ const ExchangeForm = ({
           handleSubmit,
           isSubmitting,
           handleReset,
-          getFieldProps
+          getFieldProps,
         }) => (
-          <form data-test='test-form' onSubmit={handleSubmit} noValidate autoComplete="off">
+          <form
+            data-test="test-form"
+            onSubmit={handleSubmit}
+            noValidate
+            autoComplete="off"
+          >
             {status && (
               <div
                 role="alert"
@@ -102,8 +103,14 @@ const ExchangeForm = ({
                         Name
                       </label>
                       <div className="col-lg-9 col-xl-9">
-                        <Field data-test = 'test-name' type="text" name="name" component={Input} placeholder='Enter name'/>
-                          {/* {({ field, form, meta}) => (
+                        <Field
+                          data-test="test-name"
+                          type="text"
+                          name="apiDefinitionName"
+                          component={Input}
+                          placeholder="Enter name"
+                        />
+                        {/* {({ field, form, meta}) => (
                             <div>
                               <input
                                 type="text"
@@ -119,8 +126,6 @@ const ExchangeForm = ({
                               )}
                             </div>
                           )} */}
-                       
-                       
                       </div>
                     </div>
 
@@ -129,7 +134,13 @@ const ExchangeForm = ({
                         Description
                       </label>
                       <div className="col-lg-9 col-xl-9">
-                        <Field data-test = 'test-description' type="text" name="description" component={Textarea} placeholder='Enter description...'>
+                        <Field
+                          data-test="test-description"
+                          type="text"
+                          name="apiDefinitionDescription"
+                          component={Textarea}
+                          placeholder="Enter description..."
+                        >
                           {/* {({ field, form, meta }) => (
                             <div>
                               <textarea
@@ -154,7 +165,9 @@ const ExchangeForm = ({
                         Input Types
                       </label>
                       <div className="col-lg-12 col-xl-12 mt-2">
-                        <InputTypeField inputTypes={values && values.inputTypes}/>
+                        <InputTypeField
+                          inputEventTypes={values && values.inputEventTypes}
+                        />
                       </div>
                     </div>
                     <div className="form-group row">
@@ -162,7 +175,9 @@ const ExchangeForm = ({
                         Output Types
                       </label>
                       <div className="col-lg-12 col-xl-12 mt-2">
-                        <OutputTypeField outputTypes={values&&values.outputTypes} />
+                        <OutputTypeField
+                          outputEventTypes={values && values.outputEventTypes}
+                        />
                       </div>
                     </div>
                   </div>
