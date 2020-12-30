@@ -29,25 +29,25 @@ const ExchangeListTable = (props) => {
 
   const columns = [
     {
-      dataField: "name",
+      dataField: "apiName",
       text: "Name",
     },
     {
-      dataField: "description",
+      dataField: "apiDesc",
       text: "Description",
     },
     {
-      dataField: "inputType",
+      dataField: "inputParams",
       text: "Input Type",
       formatter: (cell, row) => {
-        return cell.map((name, i) => <span key={i}>{name}, </span>);
+        return cell.map((type, i) => (<span key={i}>{type.paramName} - {type.paramType}, </span>));
       },
     },
     {
-      dataField: "outputType",
+      dataField: "outputParams",
       text: "Output Type",
       formatter: (cell, row) => {
-        return cell.map((name, i) => <span key={i}>{name}, </span>);
+        return cell.map((type, i) => (<span key={i}>{type.paramName} - {type.paramType}, </span>));
       },
     },
     {
