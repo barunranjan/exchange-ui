@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getDummyData } from "../exchangeForm/exchangeFormUtility";
 
-const fetchDummyData = (page, sizePerPage) => {
+export const fetchDummyData = (page, sizePerPage) => {
   // return Array.apply(0, new Array(sizePerPage)).map((ex, i) => ({
   //   id: (page - 1) * sizePerPage + i + 1,
   //   name: "dummyName " + ((page - 1) * sizePerPage + i + 1),
@@ -12,7 +12,7 @@ const fetchDummyData = (page, sizePerPage) => {
 
   return [
     {
-      id: 103,
+      id: '103',
       apiDefinitionName: "My API Name",
       apiDefinitionDescription: "Some Description",
       inputEventTypes: [
@@ -29,7 +29,7 @@ const fetchDummyData = (page, sizePerPage) => {
       ],
     },
     {
-      id: 104,
+      id: '104',
       apiDefinitionName: "My Another API Name",
       apiDefinitionDescription: "Some Description",
       inputEventTypes: [

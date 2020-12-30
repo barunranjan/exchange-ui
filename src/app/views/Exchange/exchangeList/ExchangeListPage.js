@@ -17,20 +17,18 @@ class ExchangeListPage extends Component {
       page: 1,
     },
   };
+
   componentDidMount() {
     this.fetchData(1, 10);
   }
 
   fetchData = async (page, sizePerPage) => {
-      console.log("FETCHING FROM API", page, sizePerPage);
-    //  this.setState({
-    //     dummyData: fetchDummyData(page, sizePerPage),
-    //     queryParams: { ...this.state.queryParams, page, sizePerPage },
-    //   });
+    // console.log("FETCHING FROM API", page, sizePerPage);
+
     try {
       this.setState({ loading: true });
       const apiConfigs = await fetchExchangeApiList(page, sizePerPage);
-      console.log("apiConfigs", apiConfigs);
+      // console.log("apiConfigs", apiConfigs);
       this.setState({
         apiConfigs: apiConfigs.content,
         queryParams: {
@@ -52,41 +50,44 @@ class ExchangeListPage extends Component {
   };
   render() {
     return (
-      <div>
-        {this.state.loading && <AppLoader />}
-        <Row>
-          <Col sm={12}>
-            <div className="row mb-1">
-              <div className="col-lg-12 text-right">
-                <Link
-                  color="primary"
-                  className="btn btn-primary"
-                  to="/exchange/new"
-                >
-                  <i className="ti ti-plus"></i> Add Exchange
-                </Link>
-              </div>
-            </div>
-            <Card>
-              <CardBody>
-                <div className="d-flex align-items-center">
-                  <div>
-                    <CardTitle>Exchange</CardTitle>
-                    {/* <CardSubtitle>Overview of Latest Month</CardSubtitle> */}
-                  </div>
+      <>
+        {this.state.loading && <AppLoader data-test="test-AppLoader" />}
+        <div data-test="test-ExchangeListPage">
+          <Row>
+            <Col sm={12}>
+              <div className="row mb-1">
+                <div className="col-lg-12 text-right">
+                  <Link
+                    color="primary"
+                    className="btn btn-primary"
+                    to="/exchange/new"
+                    data-test="test-AddButton"
+                  >
+                    <i className="ti ti-plus"></i> Add Exchange
+                  </Link>
                 </div>
-                <ExchangeListTable
-                  apiConfigs={this.state.apiConfigs}
-                  queryParams={this.state.queryParams}
-                  fetchData={this.fetchData}
-                  loading={this.state.loading}
-                  onEditExchange={this.onEditExchange}
-                />
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+              </div>
+              <Card>
+                <CardBody>
+                  <div className="d-flex align-items-center">
+                    <div>
+                      <CardTitle>Exchange</CardTitle>
+                      {/* <CardSubtitle>Overview of Latest Month</CardSubtitle> */}
+                    </div>
+                  </div>
+                  <ExchangeListTable
+                    apiConfigs={this.state.apiConfigs}
+                    queryParams={this.state.queryParams}
+                    fetchData={this.fetchData}
+                    loading={this.state.loading}
+                    onEditExchange={this.onEditExchange}
+                  />
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      </>
     );
   }
 }
