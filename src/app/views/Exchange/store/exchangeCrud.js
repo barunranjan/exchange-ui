@@ -1,4 +1,5 @@
 import axios from "axios";
+import { env } from "../../../../env";
 import { getDummyData } from "../exchangeForm/exchangeFormUtility";
 
 export const fetchDummyData = (page, sizePerPage) => {
@@ -49,49 +50,49 @@ export const fetchDummyData = (page, sizePerPage) => {
 };
 
 export function fetchExchangeApiList(page, sizePerPage) {
-  // return axios.get(`exchange`, {
-  //   params: {
-  //     page,
-  //     sizePerPage,
-  //   },
-  // });
-
-  return Promise.resolve({
-    content: fetchDummyData(page, sizePerPage),
-    pageable: {
-      sort: {
-        sorted: false,
-        unsorted: true,
-        empty: true,
-      },
-      offset: 0,
-      pageNumber: 0,
-      pageSize: 1,
-      paged: true,
-      unpaged: false,
+  return axios.get(`apidef`, {
+    params: {
+      pageNo: page,
+      pageSize: sizePerPage,
     },
-    totalPages: 100,
-    totalElements: 100,
-    last: false,
-    number: 0,
-    sort: {
-      sorted: false,
-      unsorted: true,
-      empty: true,
-    },
-    size: 1,
-    numberOfElements: 1,
-    first: true,
-    empty: false,
   });
+
+  // return Promise.resolve({
+  //   content: fetchDummyData(page, sizePerPage),
+  //   pageable: {
+  //     sort: {
+  //       sorted: false,
+  //       unsorted: true,
+  //       empty: true,
+  //     },
+  //     offset: 0,
+  //     pageNumber: 0,
+  //     pageSize: 1,
+  //     paged: true,
+  //     unpaged: false,
+  //   },
+  //   totalPages: 100,
+  //   totalElements: 100,
+  //   last: false,
+  //   number: 0,
+  //   sort: {
+  //     sorted: false,
+  //     unsorted: true,
+  //     empty: true,
+  //   },
+  //   size: 1,
+  //   numberOfElements: 1,
+  //   first: true,
+  //   empty: false,
+  // });
 }
 export function searchInputType(text) {
-  return axios.get(`/eventRegistry/eventName/${text}`);
+  return axios.get(`${env.apiUrl}/eventRegistry/eventName/${text}`);
 }
 export function createExchange(exchangeData) {
-  return axios.post(`exchange`, exchangeData);
+  return axios.post(`apidef`, exchangeData);
 }
 export function fetchExchangeById(exchangeId) {
-  // return axios.get(`exchange/${exchangeId}`);
-  return Promise.resolve(getDummyData());
+  return axios.get(`apidef/${exchangeId}`);
+  // return Promise.resolve(getDummyData());
 }

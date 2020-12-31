@@ -28,13 +28,14 @@ const ExchangeCreatePage = (props) => {
   
   const handleSubmit = (data) => {
     console.log("data", data);
-    // createExchange(data)
-    //   .then((response) => {
-    //     Toast.successMsg("Api saved successfully");
-    //   })
-    //   .catch((err) => {
-    //     Toast.errorMsg("something went wrong");
-    //   });
+    createExchange(data)
+      .then((response) => {
+        Toast.successMsg("Api saved successfully");
+        goBack();
+      })
+      .catch((err) => {
+        Toast.errorMsg("something went wrong");
+      });
   };
 
   const goBack = () => {

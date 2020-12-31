@@ -27,8 +27,8 @@ class ExchangeListPage extends Component {
 
     try {
       this.setState({ loading: true });
-      const apiConfigs = await fetchExchangeApiList(page, sizePerPage);
-      // console.log("apiConfigs", apiConfigs);
+      const {data: apiConfigs} = await fetchExchangeApiList(page, sizePerPage);
+      console.log("apiConfigs", apiConfigs);
       this.setState({
         apiConfigs: apiConfigs.content,
         queryParams: {

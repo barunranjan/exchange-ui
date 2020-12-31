@@ -1,11 +1,11 @@
 const dev = {
   apiUrl: "http://localhost:8000/admin",
-  simulatorUrl: "http://localhost:9000/simulator",
+  exchangeUrl: "http://localhost:7000",
 };
 
 const prod = {
   apiUrl: "/admin",
-  simulatorUrl: "/simulator",
+  exchangeUrl: "http://localhost:7000",
 };
 
 export const env = process.env.NODE_ENV === "production" ? prod : dev;

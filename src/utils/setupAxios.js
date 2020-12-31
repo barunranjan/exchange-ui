@@ -1,7 +1,7 @@
 import { env } from "../env";
 
 export default function setupAxios(axios) {
-  axios.defaults.baseURL = env.apiUrl;
+  axios.defaults.baseURL = env.exchangeUrl;
 
   axios.interceptors.request.use(
     (config) => {
